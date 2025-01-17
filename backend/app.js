@@ -4,8 +4,8 @@ const express = require("express");
 const path = require("path");
 const cors = require("cors");
 
-const backend_port = process.env.BACKENDPORT;
-const frontend_port = process.env.FRONTENDPORT;
+const backend_port = process.env.BACKEND_PORT;
+const frontend_port = process.env.FRONTEND_PORT;
 
 const app = express();
 
@@ -25,7 +25,7 @@ app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 require("./config/db.js");
 
 // routes
-const router = require("./routes/router.js");
+const router = require("./routes/Router.js");
 app.use(router);
 
 app.listen(backend_port, () => {
