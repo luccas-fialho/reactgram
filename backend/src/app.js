@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+const { swaggerUi, swaggerDocs } = require("../swagger");
 
 const backend_port = process.env.BACKEND_PORT;
 const frontend_port = process.env.FRONTEND_PORT;
@@ -20,6 +21,9 @@ app.use(
 
 // upload directory
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+
+// Swagger route
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // db connection
 require("./config/db.js");
