@@ -10,17 +10,17 @@ const imageStorage = multer.diskStorage({
       folder = photos;
     }
 
-    cb(null, `uploads/${folder}/`);
+    cb(null, `src/uploads/${folder}/`);
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now + path.extname(file.originalname));
+    cb(null, Date.now() + path.extname(file.originalname));
   },
 });
 
 const imageUpload = multer({
   storage: imageStorage,
   fileFilter: (req, file, cb) => {
-    if (!file.originalname.match(/\.(png|jpg)$/)) {
+    if (!file.originalname.match(/\.(png|jpg)$/i)) {
       // Upload only png and jpg formats
       cb(new Error("Only png or jpg are accepted!"));
     }
@@ -28,4 +28,4 @@ const imageUpload = multer({
   },
 });
 
-module.exports = imageUpload;
+module.exports = { imageUpload };
