@@ -28,7 +28,7 @@ const registerUserAndSignIn = async (req, res) => {
     return;
   }
 
-  const passwordHash = generatePasswordHash(password);
+  const passwordHash = await generatePasswordHash(password);
 
   // Create an user
   const newUser = await User.create({
