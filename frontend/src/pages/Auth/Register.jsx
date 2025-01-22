@@ -3,16 +3,17 @@ import "./Auth.css";
 import { Link } from "react-router-dom";
 import { register, reset } from "../../slices/authSlice.js";
 import { useDispatch, useSelector } from "react-redux";
+import Message from "../../components/Message/Message.jsx";
 
 const Register = () => {
   const dispatch = useDispatch();
 
   const { loading, error } = useSelector((state) => state.auth);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -62,7 +63,9 @@ const Register = () => {
           onChange={(e) => setConfirmPassword(e.target.value)}
           value={confirmPassword || ""}
         />
-        <input type="submit" value="Sign up" />
+        {!loading && <input type="submit" value="Sign up" />}
+        {loading && <input type="submit" value="Loading..." disabled />}
+        {error && <Message msg={error} type="error" />}
       </form>
       <p>
         Already has an account? <Link to="/login">Sign in</Link>
