@@ -17,7 +17,7 @@ const userCreateValidation = () => {
       .withMessage("Password field is required!")
       .isLength({ min: 5 })
       .withMessage("Password must have at least 5 characters!"),
-    body("confirmpassword")
+    body("confirmPassword")
       .isString()
       .withMessage("Confirm password field is required!")
       .custom((value, { req }) => {
