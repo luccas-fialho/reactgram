@@ -14,9 +14,21 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import { logout, reset } from "../../slices/authSlice";
+
 const Navbar = () => {
   const { auth } = useAuth();
   const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+
+    navigate("/login");
+  };
+
   return (
     <nav id="nav">
       <Link to="/">Reactgram</Link>
@@ -45,7 +57,7 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <span>Log out</span>
+              <span onClick={handleLogout}>Log out</span>
             </li>
           </>
         ) : (
