@@ -19,7 +19,13 @@ const Profile = () => {
   const { user, loading } = useSelector((state) => state.user);
   const { user: userAuth } = useSelector((state) => state.auth);
 
+  const newPhotoForm = useRef();
+  const editPhotoFOrm = useRef();
+
   // Photo
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   useEffect(() => {
     dispatch(getUserDetails(id));
@@ -38,6 +44,22 @@ const Profile = () => {
           <p>{user.bio}</p>
         </div>
       </div>
+      {id === userAuth._id && (
+        <div className="new-photo" ref={newPhotoForm}>
+          <h3>Share a moment of yours:</h3>
+          <form onSubmit={handleSubmit}>
+            <label>
+              <span>Photo title:</span>
+              <input type="text" placeholder="Type a title" />
+            </label>
+            <label>
+              <span>Image:</span>
+              <input type="file" />
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
+      )}
     </div>
   );
 };
