@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 
 import { getUserDetails } from "../../slices/userSlice";
 import {
+  deletePhoto,
   getUserPhotos,
   publishPhoto,
   resetMessage,
@@ -78,13 +79,16 @@ const Profile = () => {
     image ? setImage(image) : console.log("error");
   };
 
+  const handleDelete = (id) => {
+    dispatch(deletePhoto(id));
+    resetComponentMessage();
+  };
+
   useEffect(() => {
     dispatch(getUserDetails(id));
   }, [dispatch, id]);
 
   if (loading) return <p>Loading...</p>;
-
-  console.log(photos);
 
   return (
     <div id="profile">
