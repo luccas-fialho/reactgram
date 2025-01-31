@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPhoto } from "../../slices/photoSlice";
 import PhotoItem from "../../components/PhotoItem/PhotoItem.jsx";
+import LikeContainer from "../../components/LikeContainer/LikeContainer.jsx";
 
 const Photo = () => {
   const { id } = useParams();
@@ -19,6 +20,10 @@ const Photo = () => {
     (state) => state.photo
   );
 
+  const { user } = useSelector((state) => state.user);
+
+  const handleLike = () => {};
+
   useEffect(() => {
     dispatch(getPhoto(id));
   }, [dispatch, id]);
@@ -28,6 +33,7 @@ const Photo = () => {
   return (
     <div id="photo">
       <PhotoItem photo={photo} />
+      <LikeContainer photo={photo} user={user} handleLike={handleLike} />
     </div>
   );
 };
