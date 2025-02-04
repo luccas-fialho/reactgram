@@ -20,7 +20,7 @@ import Navbar from "./components/Navbar/Navbar.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import EditProfile from "./pages/EditProfile/EditProfile.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
-import Photo from "./pages/Photos/Photo.jsx";
+import Photo from "./pages/Photo/Photo.jsx";
 
 function App() {
   const { auth, loading } = useAuth();

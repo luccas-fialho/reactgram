@@ -1,13 +1,13 @@
 import "./Photo.css";
 
-import { uploads } from "../../utils/config";
+import { uploads } from "../../utils/config.js";
 
-import Message from "../../components/Message/Message";
+import Message from "../../components/Message/Message.jsx";
 import { Link, useParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getPhoto } from "../../slices/photoSlice";
+import { getPhoto, like } from "../../slices/photoSlice.js";
 import PhotoItem from "../../components/PhotoItem/PhotoItem.jsx";
 import LikeContainer from "../../components/LikeContainer/LikeContainer.jsx";
 
@@ -20,13 +20,17 @@ const Photo = () => {
     (state) => state.photo
   );
 
-  const { user } = useSelector((state) => state.user);
-
-  const handleLike = () => {};
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
+    console.log("deu like! useeffect");
     dispatch(getPhoto(id));
   }, [dispatch, id]);
+
+  const handleLike = () => {
+    console.log("deu like!");
+    dispatch(like(photo._id));
+  };
 
   if (loading) return <p>Loading...</p>;
 
