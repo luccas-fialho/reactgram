@@ -19,6 +19,7 @@ import { logout, reset } from "../../slices/authSlice";
 const Navbar = () => {
   const { auth } = useAuth();
   const { user } = useSelector((state) => state.auth);
+  const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,12 +30,19 @@ const Navbar = () => {
     navigate("/login");
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (query) {
+      navigate(`/search?q=${query}`);
+    }
+  };
+
   return (
     <nav id="nav">
       <Link to="/">Reactgram</Link>
-      <form id="search-form">
+      <form id="search-form" onSubmit={handleSubmit}>
         <BsSearch />
-        <input type="text" />
+        <input type="text" onChange={(e) => setQuery(e.target.value)} />
       </form>
       <ul id="nav-links">
         {auth ? (
