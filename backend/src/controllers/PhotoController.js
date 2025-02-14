@@ -175,10 +175,10 @@ const searchPhotos = async (req, res) => {
 
   const photos = await Photo.find({ title: new RegExp(q, "i") }).exec();
 
-  if (!photos.length) {
+  /* if (!photos.length) {
     res.status(404).json({ errors: ["No photos found with this title!"] });
     return;
-  }
+  } */
 
   res.status(200).json(photos);
 };
