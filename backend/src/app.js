@@ -29,7 +29,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 require("./config/db.js");
 
 // routes
-const router = require("./routes/Router.js");
+const router = require("./routes/router.js");
 app.use(router);
 
 app.listen(backend_port, () => {
