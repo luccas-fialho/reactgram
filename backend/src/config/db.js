@@ -9,7 +9,7 @@ const conn = async () => {
     const dbConn = await mongoose.connect(
       `mongodb+srv://${dbUser}:${dbPassword}@cluster0.iqfaf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
     );
-    console.log("Conected to db");
+    console.log("Connected to db");
     return dbConn;
   } catch (error) {
     console.log(error);
