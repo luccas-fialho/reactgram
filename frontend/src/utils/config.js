@@ -1,6 +1,6 @@
-export const api = process.env.VITE_API_URL || "http://localhost:5000/api";
+export const api = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 export const uploads =
-  process.env.VITE_UPLOADS || "http://localhost:5000/uploads";
+  import.meta.env.VITE_UPLOADS || "http://localhost:5000/uploads";
 
 export const requestConfig = (method, data, token = null, image = null) => {
   let config;
