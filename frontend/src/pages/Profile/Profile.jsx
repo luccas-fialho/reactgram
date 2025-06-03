@@ -129,9 +129,7 @@ const Profile = () => {
   return (
     <div id="profile">
       <div className="profile-header">
-        {user.profileImage && (
-          <img src={`${uploads}/users/${user.profileImage}`} alt={user.name} />
-        )}
+        {user.profileImage && <img src={user.profileImage} alt={user.name} />}
         <div className="profile-description">
           <h2>{user.name}</h2>
           <p>{user.bio}</p>
@@ -161,9 +159,7 @@ const Profile = () => {
           </div>
           <div className="edit-photo hide" ref={editPhotoForm}>
             <p>Editing:</p>
-            {editImage && (
-              <img src={`${uploads}/photos/${editImage}`} alt={editTitle} />
-            )}
+            {editImage && <img src={editImage} alt={editTitle} />}
             <form onSubmit={handleUpdate}>
               <input
                 type="text"
@@ -186,12 +182,7 @@ const Profile = () => {
           {photos &&
             photos.map((photo) => (
               <div className="photo" key={photo._id}>
-                {photo.image && (
-                  <img
-                    src={`${uploads}/photos/${photo.image}`}
-                    alt={photo.title}
-                  />
-                )}
+                {photo.image && <img src={photo.image} alt={photo.title} />}
                 {id === userAuth._id ? (
                   <div className="actions">
                     <Link to={`/photos/${photo._id}`}>

@@ -1,31 +1,33 @@
 const multer = require("multer");
-const path = require("path");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("cloudinary").v2;
 
-const imageStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
+// Configura Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: async (req, file) => {
     let folder = "";
+
     if (req.baseUrl.includes("users")) {
       folder = "users";
     } else if (req.baseUrl.includes("photos")) {
       folder = "photos";
     }
 
-    cb(null, `src/uploads/${folder}/`);
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
+    return {
+      folder: `reactgram/${folder}`,
+      allowed_formats: ["jpg", "png"],
+      public_id: Date.now().toString(),
+    };
   },
 });
 
-const imageUpload = multer({
-  storage: imageStorage,
-  fileFilter: (req, file, cb) => {
-    if (!file.originalname.match(/\.(png|jpg)$/i)) {
-      // Upload only png and jpg formats
-      cb(new Error("Only png or jpg are accepted!"));
-    }
-    cb(undefined, true);
-  },
-});
+const imageUpload = multer({ storage });
 
 module.exports = { imageUpload };

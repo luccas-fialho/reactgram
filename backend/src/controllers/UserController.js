@@ -85,7 +85,7 @@ const updateUser = async (req, res) => {
 
   let profileImage = null;
 
-  if (req.file) profileImage = req.file.filename;
+  if (req.file) profileImage = req.file.path;
 
   const reqUser = req.user;
 
