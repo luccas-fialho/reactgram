@@ -74,9 +74,7 @@ const EditProfile = () => {
         <img
           className="profile-image"
           src={
-            imagePreview
-              ? URL.createObjectURL(imagePreview)
-              : `${uploads}/users/${user.profileImage}`
+            imagePreview ? URL.createObjectURL(imagePreview) : user.profileImage
           }
           alt={user.name}
         />
