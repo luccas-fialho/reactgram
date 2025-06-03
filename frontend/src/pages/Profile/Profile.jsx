@@ -177,7 +177,7 @@ const Profile = () => {
         </>
       )}
       <div className="user-photos">
-        <h2>Your photos:</h2>
+        <h2>Photos:</h2>
         <div className="photos-container">
           {photos &&
             photos.map((photo) => (
@@ -193,7 +193,7 @@ const Profile = () => {
                   </div>
                 ) : (
                   <Link className="btn" to={`/photos/${photo._id}`}>
-                    Ver
+                    See
                   </Link>
                 )}
               </div>
